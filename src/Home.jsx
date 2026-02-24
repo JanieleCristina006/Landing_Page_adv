@@ -1,5 +1,6 @@
 import { AreasAtuacao } from "./components/sections/AreasAtuacao";
 import { Contato } from "./components/sections/Contato";
+import { Footer } from "./components/sections/Footer";
 import { Header } from "./components/sections/Header";
 import { HeroSection } from "./components/sections/HeroSection";
 import { Sobre } from "./components/sections/Sobre";
@@ -16,6 +17,7 @@ export const Home = () => {
         <AreasAtuacao />
         <Sobre />
         <Contato/> 
+        <Footer />
     </>
   );
 };
