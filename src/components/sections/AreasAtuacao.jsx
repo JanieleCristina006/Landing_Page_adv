@@ -1,31 +1,36 @@
 import { useMemo, useState } from "react";
+import { ArrowRight, ShieldCheck, Gavel, FileText, Landmark } from "lucide-react";
 
 export function AreasAtuacao() {
   const areas = useMemo(
     () => [
       {
         id: "familia",
+        icon: <ShieldCheck className="h-5 w-5" />,
         title: "Família & Sucessões",
-        subtitle: "Decisões sensíveis. Estratégia firme. Condução segura.",
+        subtitle: "Decisões sensíveis com condução segura e estratégia firme.",
         bullets: ["Divórcio e partilha", "Guarda e convivência", "Pensão", "Inventário"],
         tag: "Alta urgência",
       },
       {
         id: "civel",
+        icon: <Gavel className="h-5 w-5" />,
         title: "Cível Estratégico",
-        subtitle: "Ações e defesas com foco em resultado e previsibilidade.",
+        subtitle: "Ações e defesas com foco em previsibilidade e resultado.",
         bullets: ["Indenizações", "Cobranças", "Responsabilidade civil", "Tutelas de urgência"],
         tag: "Contencioso",
       },
       {
         id: "contratos",
+        icon: <FileText className="h-5 w-5" />,
         title: "Contratos",
-        subtitle: "Clareza, blindagem e negociação: contrato não é detalhe.",
+        subtitle: "Clareza e blindagem: contrato não é detalhe.",
         bullets: ["Revisão", "Elaboração", "Aditivos", "Cláusulas de risco"],
         tag: "Preventivo",
       },
       {
         id: "patrimonial",
+        icon: <Landmark className="h-5 w-5" />,
         title: "Patrimonial",
         subtitle: "Proteção e organização de bens com visão de longo prazo.",
         bullets: ["Planejamento patrimonial", "Regularização", "Holdings", "Partilhas complexas"],
@@ -39,220 +44,196 @@ export function AreasAtuacao() {
   const active = areas.find((a) => a.id === activeId) ?? areas[0];
 
   return (
-    <section id="areas" className="relative bg-[#07090d] overflow-hidden">
-      {/* Fundo */}
+    <section id="areas" className="relative overflow-hidden bg-[#05070B] text-white">
+      {/* Fundo clean (menos ruído) */}
       <div className="absolute inset-0">
-        <div className="absolute -top-40 right-[-140px] w-[520px] h-[520px] bg-[#C6A85E]/10 blur-3xl rounded-full" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/65" />
-        <div className="absolute inset-0 opacity-[0.14]">
-          <svg className="w-full h-full" viewBox="0 0 1200 800" preserveAspectRatio="none">
-            <path d="M0 140H1200" stroke="white" strokeWidth="1" />
-            <path d="M0 280H1200" stroke="white" strokeWidth="1" />
-            <path d="M0 420H1200" stroke="white" strokeWidth="1" />
-            <path d="M0 560H1200" stroke="white" strokeWidth="1" />
-          </svg>
-        </div>
+        <div className="absolute inset-0 bg-[radial-gradient(900px_420px_at_15%_15%,rgba(198,168,94,0.14),transparent_55%),radial-gradient(900px_420px_at_85%_75%,rgba(13,43,76,0.38),transparent_55%)]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20 lg:py-24">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-6 py-16 sm:py-20 lg:py-24">
         {/* Cabeçalho */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-3">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-3 mb-5">
               <span className="h-[1px] w-10 bg-[#C6A85E]/70" />
-              <p className="text-[#C6A85E] text-[11px] sm:text-xs tracking-[0.35em] uppercase">
+              <span className="text-xs tracking-[0.35em] uppercase text-[#C6A85E]/80">
                 Áreas de atuação
-              </p>
+              </span>
             </div>
 
-            <h2 className="mt-4 sm:mt-5 text-[34px] leading-[1.02] sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+            <h2 className="text-4xl md:text-6xl font-serif font-bold leading-[1.05]">
               A condução jurídica certa{" "}
-              <span className="text-white/65">muda o jogo.</span>
+              <span className="text-white/60">muda o jogo.</span>
             </h2>
 
-            <p className="mt-4 text-[15px] sm:text-lg text-gray-300 leading-relaxed">
+            <p className="mt-5 text-white/70 text-base md:text-lg leading-relaxed">
               Atuação técnica em casos familiares, cíveis e patrimoniais — com linguagem clara,
               estratégia e postura firme em cada etapa.
             </p>
           </div>
 
-          {/* Selo */}
-          <div className="flex items-center gap-3 text-white/70">
-            <div className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 grid place-items-center">
-              <span className="text-[#C6A85E] font-semibold">VR</span>
-            </div>
-            <div className="text-sm">
-              <p className="text-white font-semibold leading-tight">Atendimento Premium</p>
-              <p className="text-white/60 text-xs">Triagem rápida e orientação inicial</p>
-            </div>
-          </div>
-        </div>
-
-        {/* MOBILE: chips + accordion */}
-        <div className="mt-10 lg:hidden">
-          {/* Chips (melhor no toque) */}
-          <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {areas.map((a) => {
-              const selected = a.id === activeId;
-              return (
-                <button
-                  key={a.id}
-                  onClick={() => setActiveId(a.id)}
-                  className={`shrink-0 rounded-full px-4 py-2 text-sm border transition
-                    ${
-                      selected
-                        ? "border-[#C6A85E]/45 bg-[#C6A85E]/12 text-[#C6A85E]"
-                        : "border-white/15 bg-white/5 text-white/75"
-                    }`}
-                >
-                  {a.title}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Accordion cards */}
-          <div className="mt-5 space-y-3">
-            {areas.map((a, idx) => {
-              const open = a.id === activeId;
-              return (
-                <div
-                  key={a.id}
-                  className={`rounded-2xl border overflow-hidden backdrop-blur-md transition
-                    ${
-                      open
-                        ? "border-[#C6A85E]/25 bg-black/35"
-                        : "border-white/10 bg-white/5"
-                    }`}
-                >
-                  <button
-                    onClick={() => setActiveId(a.id)}
-                    aria-expanded={open}
-                    className="w-full text-left p-4"
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span
-                            className={`h-2 w-2 rounded-full ${
-                              open ? "bg-[#C6A85E]" : "bg-white/25"
-                            }`}
-                          />
-                          <p className="text-white font-semibold leading-tight">{a.title}</p>
-                        </div>
-                        <p className="mt-2 text-white/70 text-sm leading-relaxed">
-                          {a.subtitle}
-                        </p>
-                      </div>
-
-                      <span
-                        className={`shrink-0 text-[11px] px-3 py-1 rounded-full border
-                          ${
-                            open
-                              ? "border-[#C6A85E]/35 text-[#C6A85E] bg-[#C6A85E]/10"
-                              : "border-white/15 text-white/60 bg-white/5"
-                          }`}
-                      >
-                        {a.tag}
-                      </span>
-                    </div>
-
-                    <div className="mt-3 flex items-center gap-3">
-                      <span className="h-[1px] w-10 bg-white/15" />
-                      <span className={`h-[1px] flex-1 ${open ? "bg-[#C6A85E]/55" : "bg-white/10"}`} />
-                      <span className="text-[11px] text-white/45">0{idx + 1}</span>
-                    </div>
-                  </button>
-
-                  {open && (
-                    <div className="px-4 pb-4">
-                      <div className="mt-1 rounded-2xl border border-white/10 bg-black/25 p-4">
-                        <p className="text-[#C6A85E] text-[11px] tracking-[0.35em] uppercase">
-                          Em destaque
-                        </p>
-
-                        <ul className="mt-4 space-y-3">
-                          {a.bullets.map((b) => (
-                            <li key={b} className="flex items-center gap-3 text-white/85">
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#C6A85E]" />
-                              <span className="text-sm">{b}</span>
-                            </li>
-                          ))}
-                        </ul>
-
-                        <div className="mt-5 flex flex-col gap-2">
-                          <a
-                            href="#contato"
-                            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl
-                                       bg-[#C6A85E] text-[#0D2B4C] font-semibold hover:brightness-110 transition"
-                          >
-                            Agendar Atendimento <span className="text-lg">→</span>
-                          </a>
-
-                          <a
-                            href="tel:+5571XXXXXXXX"
-                            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl
-                                       border border-white/15 text-white/90 hover:bg-white/10 transition"
-                          >
-                            (71) XXXX-XXXX
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+          {/* Selo (mais limpo) */}
+          <div className="lg:w-[360px]">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 shadow-[0_20px_80px_rgba(0,0,0,0.55)]">
+              <div className="flex items-start gap-4">
+                <div className="h-10 w-10 rounded-full grid place-items-center bg-white/5 border border-white/10 text-[#C6A85E]">
+                  <span className="font-semibold">VR</span>
                 </div>
-              );
-            })}
+                <div>
+                  <p className="font-semibold">Atendimento Premium</p>
+                  <p className="text-sm text-white/65">
+                    Triagem rápida, orientação inicial e acompanhamento próximo.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* DESKTOP: lista + painel (igual ao teu, só sem hover obrigatório) */}
+        {/* MOBILE (coeso): accordion com o mesmo “painel” */}
+        <div className="mt-10 lg:hidden space-y-3">
+          {areas.map((a) => {
+            const open = a.id === activeId;
+
+            return (
+              <div
+                key={a.id}
+                className={[
+                  "rounded-2xl border overflow-hidden backdrop-blur-xl transition",
+                  open ? "border-[#C6A85E]/30 bg-white/[0.05]" : "border-white/10 bg-white/[0.03]",
+                ].join(" ")}
+              >
+                <button
+                  onClick={() => setActiveId(open ? "" : a.id)}
+                  className="w-full text-left p-5"
+                  aria-expanded={open}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-start gap-3">
+                      <div
+                        className={[
+                          "h-10 w-10 rounded-xl grid place-items-center border shrink-0",
+                          open
+                            ? "border-[#C6A85E]/30 bg-[#C6A85E]/10 text-[#C6A85E]"
+                            : "border-white/10 bg-white/5 text-white/80",
+                        ].join(" ")}
+                      >
+                        {a.icon}
+                      </div>
+
+                      <div>
+                        <p className="font-semibold text-white leading-tight">{a.title}</p>
+                        <p className="mt-1 text-sm text-white/65 leading-relaxed">{a.subtitle}</p>
+                      </div>
+                    </div>
+
+                    <span
+                      className={[
+                        "shrink-0 text-[11px] px-3 py-1 rounded-full border whitespace-nowrap",
+                        open
+                          ? "border-[#C6A85E]/35 text-[#C6A85E] bg-[#C6A85E]/10"
+                          : "border-white/15 text-white/60 bg-white/5",
+                      ].join(" ")}
+                    >
+                      {a.tag}
+                    </span>
+                  </div>
+                </button>
+
+                {open && (
+                  <div className="px-5 pb-5">
+                    <div className="rounded-2xl border border-white/10 bg-black/25 p-5">
+                      <p className="text-[#C6A85E] text-[11px] tracking-[0.35em] uppercase">
+                        Principais frentes
+                      </p>
+
+                      <ul className="mt-4 space-y-3">
+                        {a.bullets.map((b) => (
+                          <li key={b} className="flex items-center gap-3 text-white/85">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#C6A85E]" />
+                            <span className="text-sm">{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <div className="mt-5 flex flex-col gap-3">
+                        <a
+                          href="#contato"
+                          className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 bg-[#C6A85E] text-[#0D2B4C] font-semibold hover:brightness-110 transition"
+                        >
+                          Solicitar atendimento
+                          <ArrowRight className="h-4 w-4" />
+                        </a>
+
+                        <a
+                          href="tel:+5571XXXXXXXX"
+                          className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 border border-white/15 text-white/90 hover:bg-white/10 transition"
+                        >
+                          (71) XXXX-XXXX
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* DESKTOP: tabs (esquerda) + painel (direita) */}
         <div className="mt-12 hidden lg:grid lg:grid-cols-12 gap-8 items-stretch">
-          {/* Lista */}
+          {/* Lista / Tabs */}
           <div className="lg:col-span-7">
-            <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl overflow-hidden shadow-[0_28px_120px_rgba(0,0,0,0.55)]">
               <div className="px-7 py-5 border-b border-white/10 bg-black/20">
                 <p className="text-white/70 text-sm">Selecione uma área para ver detalhes.</p>
               </div>
 
               <div className="divide-y divide-white/10">
                 {areas.map((a, idx) => {
-                  const isActive = activeId === a.id;
+                  const isActive = a.id === activeId;
 
                   return (
                     <button
                       key={a.id}
-                      onFocus={() => setActiveId(a.id)}
                       onClick={() => setActiveId(a.id)}
-                      className={`w-full text-left px-7 py-6 transition-all duration-300
-                        ${isActive ? "bg-black/35" : "hover:bg-black/25"}
-                      `}
+                      className={[
+                        "w-full text-left px-7 py-6 transition",
+                        isActive ? "bg-white/[0.05]" : "hover:bg-white/[0.04]",
+                      ].join(" ")}
                     >
                       <div className="flex items-start justify-between gap-4">
-                        <div>
-                          <div className="flex items-center gap-3">
-                            <span
-                              className={`h-2 w-2 rounded-full ${
-                                isActive ? "bg-[#C6A85E]" : "bg-white/25"
-                              }`}
-                            />
+                        <div className="flex items-start gap-4">
+                          <div
+                            className={[
+                              "h-11 w-11 rounded-xl grid place-items-center border shrink-0",
+                              isActive
+                                ? "border-[#C6A85E]/30 bg-[#C6A85E]/10 text-[#C6A85E]"
+                                : "border-white/10 bg-white/5 text-white/80",
+                            ].join(" ")}
+                          >
+                            {a.icon}
+                          </div>
+
+                          <div>
                             <p className="text-white text-lg font-semibold tracking-tight">
                               {a.title}
                             </p>
+                            <p className="mt-2 text-white/65 text-sm leading-relaxed max-w-xl">
+                              {a.subtitle}
+                            </p>
                           </div>
-
-                          <p className="mt-2 text-white/70 text-sm leading-relaxed max-w-xl">
-                            {a.subtitle}
-                          </p>
                         </div>
 
                         <span
-                          className={`shrink-0 text-xs px-3 py-1 rounded-full border transition
-                            ${
-                              isActive
-                                ? "border-[#C6A85E]/40 text-[#C6A85E] bg-[#C6A85E]/10"
-                                : "border-white/15 text-white/60 bg-white/5"
-                            }`}
+                          className={[
+                            "shrink-0 text-xs px-3 py-1 rounded-full border whitespace-nowrap",
+                            isActive
+                              ? "border-[#C6A85E]/35 text-[#C6A85E] bg-[#C6A85E]/10"
+                              : "border-white/15 text-white/60 bg-white/5",
+                          ].join(" ")}
                         >
                           {a.tag}
                         </span>
@@ -261,11 +242,12 @@ export function AreasAtuacao() {
                       <div className="mt-4 flex items-center gap-3">
                         <span className="h-[1px] w-10 bg-white/15" />
                         <span
-                          className={`h-[1px] flex-1 ${
-                            isActive ? "bg-[#C6A85E]/60" : "bg-white/10"
-                          }`}
+                          className={[
+                            "h-[1px] flex-1 transition",
+                            isActive ? "bg-[#C6A85E]/60" : "bg-white/10",
+                          ].join(" ")}
                         />
-                        <span className="text-xs text-white/50">0{idx + 1}</span>
+                        <span className="text-xs text-white/45">0{idx + 1}</span>
                       </div>
                     </button>
                   );
@@ -276,57 +258,65 @@ export function AreasAtuacao() {
 
           {/* Painel */}
           <div className="lg:col-span-5">
-            <div className="relative h-full rounded-3xl border border-white/10 overflow-hidden bg-black/25 backdrop-blur-xl">
+            <div className="relative h-full rounded-3xl border border-white/10 overflow-hidden bg-white/[0.03] backdrop-blur-xl shadow-[0_28px_120px_rgba(0,0,0,0.55)]">
               <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#C6A85E]/12 via-transparent to-black/40" />
-                <div className="absolute inset-0 bg-[radial-gradient(closest-side,rgba(255,255,255,0.08),transparent)] opacity-70" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#C6A85E]/12 via-transparent to-black/35" />
+                <div className="absolute -top-24 -right-24 w-72 h-72 bg-[#C6A85E]/10 blur-3xl rounded-full" />
               </div>
 
               <div className="relative z-10 p-8 h-full flex flex-col">
                 <p className="text-[#C6A85E] text-xs tracking-[0.35em] uppercase">Em destaque</p>
 
-                <h3 className="mt-4 text-2xl font-extrabold text-white tracking-tight">
-                  {active.title}
-                </h3>
+                <div className="mt-4 flex items-start gap-4">
+                  <div className="h-11 w-11 rounded-xl grid place-items-center bg-[#C6A85E]/10 border border-[#C6A85E]/25 text-[#C6A85E]">
+                    {active.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-extrabold text-white tracking-tight">
+                      {active.title}
+                    </h3>
+                    <p className="mt-2 text-white/75 leading-relaxed">{active.subtitle}</p>
+                  </div>
+                </div>
 
-                <p className="mt-3 text-white/75 leading-relaxed">{active.subtitle}</p>
-
-                <ul className="mt-6 space-y-3">
-                  {active.bullets.map((b) => (
-                    <li key={b} className="flex items-center gap-3 text-white/85">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#C6A85E]" />
-                      <span className="text-sm">{b}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="mt-6">
+                  <p className="text-white/70 text-sm">Principais frentes:</p>
+                  <ul className="mt-4 space-y-3">
+                    {active.bullets.map((b) => (
+                      <li key={b} className="flex items-center gap-3 text-white/85">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#C6A85E]" />
+                        <span className="text-sm">{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
                 <div className="mt-auto pt-8">
-                  <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+                  <div className="rounded-2xl border border-white/10 bg-black/25 p-5">
                     <p className="text-white font-semibold">Quer iniciar agora?</p>
                     <p className="text-white/70 text-sm mt-1">
-                      Clique para simular um agendamento e receber a orientação inicial.
+                      Envie sua demanda e receba orientação inicial.
                     </p>
 
                     <div className="mt-4 flex flex-col sm:flex-row gap-3">
                       <a
                         href="#contato"
-                        className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl
-                                   bg-[#C6A85E] text-[#0D2B4C] font-semibold hover:brightness-110 transition"
+                        className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 bg-[#C6A85E] text-[#0D2B4C] font-semibold hover:brightness-110 transition whitespace-nowrap"
                       >
-                        Agendar Atendimento <span className="text-lg">→</span>
+                        Solicitar atendimento
+                        <ArrowRight className="h-4 w-4" />
                       </a>
 
                       <a
                         href="tel:+5571XXXXXXXX"
-                        className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl
-                                   border border-white/15 text-white/90 hover:bg-white/10 transition"
+                        className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 border border-white/15 text-white/90 hover:bg-white/10 transition whitespace-nowrap"
                       >
                         (71) XXXX-XXXX
                       </a>
                     </div>
                   </div>
 
-                  <div className="mt-6 flex items-center gap-3 text-white/50">
+                  <div className="mt-6 flex items-center gap-3 text-white/45">
                     <span className="h-[1px] w-10 bg-white/15" />
                     <span className="text-xs tracking-[0.25em] uppercase">
                       Estratégia • Técnica • Resultado
@@ -334,10 +324,9 @@ export function AreasAtuacao() {
                   </div>
                 </div>
               </div>
-
-              <div className="absolute top-0 right-0 w-28 h-28 bg-[#C6A85E]/10 blur-2xl" />
             </div>
           </div>
+          {/* /Painel */}
         </div>
       </div>
     </section>
