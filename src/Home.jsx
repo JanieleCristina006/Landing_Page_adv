@@ -3,6 +3,7 @@ import { Contato } from "./components/sections/Contato";
 import { Footer } from "./components/sections/Footer";
 import { Header } from "./components/sections/Header";
 import { HeroSection } from "./components/sections/HeroSection";
+import { Servicos } from "./components/sections/Servicos";
 import { Sobre } from "./components/sections/Sobre";
 import { ChatAgendamento } from "./components/ui/ChatAgendamento";
 
@@ -16,6 +17,7 @@ export const Home = () => {
         <ChatAgendamento />
         <AreasAtuacao />
         <Sobre />
+        <Servicos />
         <Contato/> 
         <Footer />
     </>
